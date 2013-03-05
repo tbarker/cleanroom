@@ -33,8 +33,29 @@ apt-get install -y firmware-b43-installer firmware-linux-nonfree xfce4-hdaps fir
 # Smart Cards
 apt-get install -y opensc libccid coolkey openct
 
-# Harden kernel (Would like to use selinux, but default policies too broken on desktops)
-apt-get install -y linux-patch-grsecurity2
+# Sandbox email and web under seperate users
+adduser iceweasel --gecos "" --disabled-password
+adduser icedove --gecos "" --disabled-password
+
+# Need to pull them back onto our display
+echo "
+User_Alias X_USERS = cdrom
+Defaults:X_USERS env_reset
+Defaults:X_USERS env_keep += DISPLAY
+Defaults:X_USERS env_keep += XAUTHORITY
+
+# Any user that can insert a CD, can use web and email sandboxes
+# Icedove is allowed to reach into the web sandbox, but not
+# the reverse.
+%cdrom ALL=(iceweasel) NOPASSWD:ALL
+%cdrom ALL=(icedove) NOPASSWD:ALL
+%icedove ALL=(iceweasel) NOPASSWD:ALL" >> /etc/sudoers
+echo "xhost local:" > /etc/profile.d/sandbox-xsupport.sh
+
+# Override with sandboxed versions
+echo "sudo -u iceweasel -H /usr/bin/iceweasel" > /usr/local/bin/iceweasel
+echo "sudo -u icedove -H BROWSER=/usr/local/bin/iceweasel /usr/bin/icedove" > /usr/local/bin/icedove
+chmod a+x /usr/local/bin/*
 
 # Tidy
 apt-get -y autoremove
@@ -42,7 +63,7 @@ apt-get -y autoremove
 # Not every Iceweasel plugin is packaged
 echo ""
 echo "------------------------------------------------------------------"
-echo "Now reboot to system and install HTTPS Everywhere and Perspectives"
+echo "Now reboot the system and install HTTPS Everywhere and Perspectives"
 echo "from within Iceweasel"
 echo ""
 
