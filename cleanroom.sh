@@ -61,6 +61,9 @@ echo "sudo -u iceweasel -H /usr/bin/iceweasel" > /usr/local/bin/iceweasel
 echo "sudo -u icedove -H BROWSER=/usr/local/bin/iceweasel /usr/bin/icedove" > /usr/local/bin/icedove
 chmod a+x /usr/local/bin/*
 
+# Disable root login for normal users
+echo "auth       required   pam_wheel.so" >> /etc/pam.d/su
+
 # Tidy
 apt-get -y autoremove
 
