@@ -30,7 +30,7 @@ connection.
 
 TODO
 ----
-* The icedove user can currently execute any command as iceweasel. This is excessive.
+* An "inward" facing browser user which is only used for trusted sites, e.g. AWS control panel.
 * RDesktop supports smart cards for RDP in later versions. Might be worth pulling a newer version from wheezy.
 * SELinux is tempting. I have experimented, but the default policies literally stop XFCE4 from booting. There are also many reported issues with VPNs etc.
 * GRSecurity is packaged for Debian, but only as a kernel patch. If there is a simple way to install this that would be great.

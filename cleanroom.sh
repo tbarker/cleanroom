@@ -20,7 +20,7 @@ apt-get install -y hfsplus hfsutils xfsprogs encfs sshfs
 # Basic XFCE4 desktop with email, web browser and a password manager
 apt-get install -y xorg xfce4 gdebi slim
 apt-get install -y iceweasel xul-ext-noscript xul-ext-adblock-plus iceweasel-firebug
-apt-get install -y icedove gnupg gnupg-agent enigmail
+apt-get install -y claws-mail gnupg gnupg-agent claws-mail-plugins claws-mail-doc
 apt-get install -y xfce4-goodies desktop-base tango-icon-theme xfce4-xfapplet-plugin gpart xfce4-notes-plugin xfce4-cellmodem-plugin vim-gnome keepassx thunar-volman
 apt-get install -y update-manager-gnome apt-watch-gnome
 
@@ -39,7 +39,7 @@ apt-get install -y opensc libccid coolkey openct
 
 # Sandbox email and web under seperate users
 adduser iceweasel --gecos "" --disabled-password
-adduser icedove --gecos "" --disabled-password
+adduser claws-mail --gecos "" --disabled-password
 
 # Need to pull them back onto our display
 echo "
@@ -49,16 +49,16 @@ Defaults:X_USERS env_keep += DISPLAY
 Defaults:X_USERS env_keep += XAUTHORITY
 
 # Any user that can insert a CD, can use web and email sandboxes
-# Icedove is allowed to reach into the web sandbox, but not
-# the reverse.
+# Claws Mail is allowed to reach into the web sandbox user account,
+# but not the reverse.
 %cdrom ALL=(iceweasel) NOPASSWD:ALL
-%cdrom ALL=(icedove) NOPASSWD:ALL
-%icedove ALL=(iceweasel) NOPASSWD:ALL" >> /etc/sudoers
+%cdrom ALL=(claws-mail) NOPASSWD:ALL
+%claws-mail ALL=(iceweasel) NOPASSWD: /usr/local/bin/iceweasel, /usr/bin/iceweasel" >> /etc/sudoers.d/sandbox
 echo "xhost local:" > /etc/profile.d/sandbox-xsupport.sh
 
-# Override with sandboxed versions
-echo "sudo -u iceweasel -H /usr/bin/iceweasel" > /usr/local/bin/iceweasel
-echo "sudo -u icedove -H BROWSER=/usr/local/bin/iceweasel /usr/bin/icedove" > /usr/local/bin/icedove
+# Override local paths with sandboxed versions
+echo "sudo -u iceweasel -H /usr/bin/iceweasel \$1" > /usr/local/bin/iceweasel
+echo "sudo -u claws-mail -H BROWSER=/usr/local/bin/iceweasel /usr/bin/claws-mail" > /usr/local/bin/claws-mail
 chmod a+x /usr/local/bin/*
 
 # Disable root login for normal users
