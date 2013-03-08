@@ -5,19 +5,21 @@ Bootstrap shell script for a hygienic sysadmin environment
 
 Cleanroom initialises a portable minimal XFCE4 desktop with remote administration and editing tools. Specifically :-
 
-* Safe web browser [Iceweasel] and mail client [Icedove]
+* Safe web browser [Claws] and mail client [Icedove]
 * KeePass Password Manager
 * SSH and standard Linux tools
 * OpenVPN and PPTP VPNs
 * Git and SVN clients
-* Windows RDP (password authentication only)
-* Smart Card support for SSH
+* Windows RDP client (password authentication only)
+* Smart Cards for SSH
 * Drivers for most laptop hardware
 
-It does not attempt to provide anonymous browsing or a full working environment.
+It does not attempt to provide anonymous browsing or a full working environment. Cleanroom is aimed at server administrators. (There are several good privacy orientated Linux distributions, my favourite is (TAILS)[https://tails.boum.org/].)
 
-No functionality as been provided that is not trivially installable from Debian stable. Both the mail client and web browser have their own user accounts, since they are the only likely attack vectors.
+No functionality as been provided that is not trivially installable from Debian stable. Cleanroom is not a development project, it is only a configuration of standard packages. Both the mail client and web browser have their own user accounts, since they are the only likely attack vectors.
 
+Get Started
+-----------
 You will need a Debian netinstall ISO, a USB stick and an ethernet internet
 connection.
 

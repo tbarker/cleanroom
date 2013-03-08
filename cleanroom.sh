@@ -1,3 +1,7 @@
+#!/bin/sh
+
+# To be run ONCE on a fresh Debian install as root.
+
 # Enable contributed and non-free packages (for hardware support)
 sed -i 's/squeeze main$/squeeze main contrib non-free/' /etc/apt/sources.list
 sed -i 's/update main$/update main contrib non-free/' /etc/apt/sources.list
@@ -9,7 +13,7 @@ tasksel install laptop
 # Normal command-line tools
 apt-get install -y vim vim-common emacs subversion-tools mtr wipe git wget curl rsync python ruby telnet elinks lftp tftp openssl screen perl netcat nmap whois htop mutt
 
-# People have AWS accounts, a few Macs and mount over SSH
+# Many people have AWS accounts, a few Macs and mount over SSH
 apt-get install -y s3cmd
 apt-get install -y hfsplus hfsutils xfsprogs encfs sshfs
 
