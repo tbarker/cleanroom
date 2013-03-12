@@ -51,6 +51,7 @@ Defaults:X_USERS env_keep += XAUTHORITY
 %cdrom ALL=(iceweasel) NOPASSWD:ALL
 %cdrom ALL=(claws-mail) NOPASSWD:ALL
 %claws-mail ALL=(iceweasel) NOPASSWD: /usr/local/bin/iceweasel, /usr/bin/iceweasel" >> /etc/sudoers.d/sandbox
+chmod -R 440 /etc/sudoers.d
 echo "xhost local:" > /etc/profile.d/sandbox-xsupport.sh
 
 # Override local paths with sandboxed versions
