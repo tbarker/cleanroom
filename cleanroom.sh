@@ -9,10 +9,11 @@ apt-get update
 
 # Set-up for laptops
 # Unattended equivalent to 'tasksel install laptop'
-apt-get install -y --force-yes --no-install-recommends wireless-tools acpi-support cpufrequtils acpi wpasupplicant powertop acpid apmd pcmciautils pm-utils anacron avahi-autoipd bluetooth
+apt-get install -y --force-yes --no-install-recommends wireless-tools acpi-support cpufrequtils acpi wpasupplicant powertop acpid apmd pcmciautils pm-utils anacron avahi-autoipd bluetooth laptop-mode-tools
 
 # Normal command-line tools
-apt-get install -y --no-install-recommends vim vim-common emacs subversion-tools mtr wipe git wget mtr-tiny mtools mlocate curl rsync python ruby telnet elinks lftp tftp openssl screen perl netcat nmap whois htop mutt
+apt-get install -y --no-install-recommends subversion-tools mtr wipe git wget mtools mlocate curl rsync python ruby telnet elinks lftp tftp openssl screen perl netcat nmap whois htop mutt
+apt-get install -y vim vim-common emacs
 
 # Many people have AWS accounts, a few Macs, Windows boxes and mount over SSH
 apt-get install -y --no-install-recommends s3cmd
@@ -20,17 +21,17 @@ apt-get install -y --no-install-recommends hfsplus hfsutils xfsprogs encfs sshfs
 apt-get install -y --force-yes --no-install-recommends smbclient
 
 # Basic XFCE4 desktop with email, web browser and a password manager
-apt-get install -y xorg xfce4 gdebi slim
+apt-get install -y xorg xfce4 gdebi slim gsynaptics
 apt-get install -y --no-install-recommends iceweasel xul-ext-noscript xul-ext-adblock-plus iceweasel-firebug
 apt-get install -y --no-install-recommends claws-mail gnupg gnupg-agent claws-mail-plugins claws-mail-doc
-apt-get install -y --no-install-recommends xfce4-goodies desktop-base tango-icon-theme xfce4-xfapplet-plugin gpart xfce4-notes-plugin xfce4-cellmodem-plugin vim-gnome keepassx thunar-volman
-apt-get install -y --no-install-recommends update-manager-gnome apt-watch-gnome
+apt-get install -y --no-install-recommends xfce4-goodies desktop-base tango-icon-theme xfce4-xfapplet-plugin gpart xfce4-notes-plugin xfce4-cellmodem-plugin vim-gnome keepassx thunar-volman gnome-disk-utility gnome-screensaver
+apt-get install -y --no-install-recommends update-manager-gnome apt-watch-gnome update-notifier
 
 # Full UI support of common VPNs
 apt-get install -y --no-install-recommends network-manager-gnome network-manager-pptp-gnome network-manager-openvpn-gnome network-manager-vpnc-gnome network-manager-openconnect
 
 # Additional drivers as suggested by the package list of TAILS
-apt-get install -y --force-yes toshset firmware-linux firmware-linux-nonfree xfce4-hdaps pciutils firmware-ralink firmware-b43-installer firmware-b43legacy-installer firmware-brcm80211 firmware-ipw2x00 firmware-iwlwifi firmware-realtek intel-microcode zd1211-firmware
+apt-get install -y --force-yes toshset firmware-linux firmware-linux-nonfree xfce4-hdaps pciutils firmware-ralink firmware-b43-installer firmware-b43legacy-installer firmware-brcm80211 firmware-ipw2x00 firmware-iwlwifi firmware-realtek zd1211-firmware
 
 # Smart Cards
 apt-get install -y --no-install-recommends opensc libccid coolkey openct
@@ -59,13 +60,19 @@ echo "xhost local:" > /etc/profile.d/sandbox-xsupport.sh
 echo "sudo -u iceweasel -H /usr/bin/iceweasel \$1" > /usr/local/bin/iceweasel
 echo "sudo -u claws-mail -H BROWSER=/usr/local/bin/iceweasel /usr/bin/claws-mail" > /usr/local/bin/claws-mail
 chmod a+x /usr/local/bin/*
+ln -s /usr/local/bin/iceweasel /usr/local/bin/sensible-browser
 
 # Disable root login for normal users
 echo "auth       required   pam_wheel.so" >> /etc/pam.d/su
 
-# Do not need printers or an extra browser
+# Smart Card configuration
+ls /home | xargs -n 1  usermod -G scard
+echo "PKCS11Provider /usr/lib/opensc/opensc-pkcs11.so" >> /etc/ssh/ssh_config
+
+# Do not need printers, MTAs or an extra browser
 apt-get remove -y --purge xfprint4 cups cups-client
 apt-get remove -y --purge epiphany-browser
+apt-get remove -y --purge exim4
 
 # Tidy
 apt-get -y autoremove
