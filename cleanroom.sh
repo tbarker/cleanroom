@@ -65,7 +65,7 @@ ln -s /usr/local/bin/iceweasel /usr/local/bin/sensible-browser
 echo "auth       required   pam_wheel.so" >> /etc/pam.d/su
 
 # Smart Card configuration
-ls /home | xargs -n 1  usermod -G scard
+ls /home | xargs -n 1  usermod -a -G scard
 echo "PKCS11Provider /usr/lib/opensc/opensc-pkcs11.so" >> /etc/ssh/ssh_config
 
 # Do not need printers, MTAs or an extra browser
