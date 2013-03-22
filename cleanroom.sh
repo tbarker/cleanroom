@@ -21,7 +21,7 @@ apt-get install -y --no-install-recommends hfsplus hfsutils xfsprogs encfs sshfs
 
 # Basic XFCE4 desktop with email, web browser and a password manager
 apt-get install -y xorg xfce4 gdebi slim gsynaptics
-apt-get install -y --no-install-recommends iceweasel xul-ext-noscript xul-ext-adblock-plus iceweasel-firebug
+apt-get install -y --no-install-recommends iceweasel foxyproxy xul-ext-noscript xul-ext-adblock-plus iceweasel-firebug
 apt-get install -y --no-install-recommends claws-mail gnupg gnupg-agent claws-mail-plugins claws-mail-doc
 apt-get install -y --no-install-recommends xfce4-goodies desktop-base tango-icon-theme xfce4-xfapplet-plugin gpart xfce4-notes-plugin xfce4-cellmodem-plugin vim-gnome keepassx thunar-volman gnome-disk-utility gnome-screensaver
 apt-get install -y --no-install-recommends update-manager-gnome apt-watch-gnome update-notifier
