@@ -18,7 +18,6 @@ apt-get install -y vim vim-common emacs
 # Many people have AWS accounts, a few Macs, Windows boxes and mount over SSH
 apt-get install -y --no-install-recommends s3cmd
 apt-get install -y --no-install-recommends hfsplus hfsutils xfsprogs encfs sshfs
-apt-get install -y --force-yes --no-install-recommends smbclient
 
 # Basic XFCE4 desktop with email, web browser and a password manager
 apt-get install -y xorg xfce4 gdebi slim gsynaptics
