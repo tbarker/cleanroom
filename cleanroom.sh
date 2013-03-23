@@ -23,17 +23,17 @@ apt-get install -y --no-install-recommends hfsplus hfsutils xfsprogs encfs sshfs
 apt-get install -y xorg xfce4 gdebi slim gsynaptics
 apt-get install -y --no-install-recommends iceweasel foxyproxy xul-ext-noscript xul-ext-adblock-plus iceweasel-firebug
 apt-get install -y --no-install-recommends claws-mail gnupg gnupg-agent claws-mail-plugins claws-mail-doc
-apt-get install -y --no-install-recommends xfce4-goodies desktop-base tango-icon-theme xfce4-xfapplet-plugin gpart xfce4-notes-plugin xfce4-cellmodem-plugin vim-gnome keepassx thunar-volman gnome-disk-utility gnome-screensaver
+apt-get install -y --no-install-recommends desktop-base tango-icon-theme xfce4-xfapplet-plugin gpart xfce4-notes-plugin xfce4-cellmodem-plugin vim-gnome keepassx thunar-volman gnome-disk-utility gnome-screensaver ristretto thunar-archive-plugin xfce4-mailwatch-plugin xfce4-mount-plugin xfce4-taskmanager xfce4-datetime-plugin xfce4-screenshooter
 apt-get install -y --no-install-recommends update-manager-gnome apt-watch-gnome update-notifier
+
+# RDP and VNC client
+apt-get install -y tsclient xvnc4viewer xnest
 
 # Full UI support of common VPNs
 apt-get install -y --no-install-recommends network-manager-gnome network-manager-pptp-gnome network-manager-openvpn-gnome network-manager-vpnc-gnome network-manager-openconnect
 
 # Additional drivers as suggested by the package list of TAILS
 apt-get install -y --force-yes toshset firmware-linux firmware-linux-nonfree xfce4-hdaps pciutils firmware-ralink firmware-b43-installer firmware-b43legacy-installer firmware-brcm80211 firmware-ipw2x00 firmware-iwlwifi firmware-realtek zd1211-firmware
-
-# Smart Cards
-apt-get install -y --no-install-recommends opensc libccid coolkey openct
 
 # Sandbox email and web under seperate users
 adduser iceweasel --gecos "" --disabled-password
@@ -65,6 +65,7 @@ ln -s /usr/local/bin/iceweasel /usr/local/bin/sensible-browser
 echo "auth       required   pam_wheel.so" >> /etc/pam.d/su
 
 # Smart Card configuration
+apt-get install -y --no-install-recommends opensc libccid coolkey openct
 ls /home | xargs -n 1  usermod -a -G scard
 echo "PKCS11Provider /usr/lib/opensc/opensc-pkcs11.so" >> /etc/ssh/ssh_config
 
