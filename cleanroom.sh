@@ -81,6 +81,9 @@ apt-get -y clean
 # Not every Iceweasel plugin is packaged
 echo ""
 echo "------------------------------------------------------------------"
+echo "Both the mail client and web browser have their own user accounts,
+echo "since they are the only likely attack vectors."
+echo ""
 echo "Now reboot the system and install HTTPS Everywhere and Perspectives"
 echo "from within Iceweasel"
 echo ""
