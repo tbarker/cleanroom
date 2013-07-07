@@ -1,7 +1,9 @@
 cleanroom
 =========
 
-Bootstrap shell script for a hygienic sysadmin environment
+Bootstrap shell script for a hygienic sysadmin environment.
+
+See my blog for the <a href="https://thomasbarker.com/13/07/cleanroom-techniques-office-geeks">reasoning behind it</a>.
 
 Cleanroom initialises a portable minimal XFCE4 desktop with remote administration and editing tools. Specifically :-
 
